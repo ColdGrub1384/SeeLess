@@ -1,0 +1,21 @@
+##############################
+# Parameters passed to clang #
+##############################
+
+# Compiles code into LLVM IR
+
+-S -emit-llvm
+
+# Enables colored output
+
+-fcolor-diagnostics
+
+# Disables Nullability warnings
+
+-Wno-nullability-completeness
+
+# Includes headers
+
+-I~/Library/usr/lib/clang/7.0.0/include
+-I~/Library/usr/include
+-I../../lib/include

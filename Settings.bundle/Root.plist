@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>DefaultValue</key>
+			<false/>
+			<key>FooterText</key>
+			<string>Passes '-v' to clang.</string>
+			<key>Key</key>
+			<string>verbose</string>
+			<key>Title</key>
+			<string>Verbose clang output</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<string>    </string>
+			<key>FooterText</key>
+			<string>This setting will be used in the code editor when inserting a tab.</string>
+			<key>Key</key>
+			<string>indentation</string>
+			<key>Title</key>
+			<string>Indentation</string>
+			<key>Titles</key>
+			<array>
+				<string>8 spaces</string>
+				<string>6 spaces</string>
+				<string>4 spaces</string>
+				<string>2 spaces</string>
+				<string>Tabs</string>
+			</array>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Values</key>
+			<array>
+				<string>        </string>
+				<string>      </string>
+				<string>    </string>
+				<string>  </string>
+				<string>	</string>
+			</array>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>SeeLess uses 'clang' to compile projects into 'LLVM Intermediate Representation (LLVM IR)' and LLVM IR code is executed with 'lli'. For more information, type 'help compiling' in the terminal.</string>
+			<key>Title</key>
+			<string></string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<string>1.0 (1)</string>
+			<key>Key</key>
+			<string>version_preference</string>
+			<key>Title</key>
+			<string>Version</string>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>Credits</string>
+			<key>Title</key>
+			<string>Acknowledgments</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+	</array>
+</dict>
+</plist>

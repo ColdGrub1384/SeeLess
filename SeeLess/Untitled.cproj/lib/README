@@ -1,0 +1,2 @@
+In this directory, put libraries to link against the program.
+Libraries must be in 'll' or 'bc' format and can be generated with SeeLess as any other program. You can put headers in the 'include' folder.

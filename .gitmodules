@@ -1,0 +1,6 @@
+[submodule "LibTerm"]
+	path = LibTerm
+	url = https://github.com/ColdGrub1384/LibTerm.git
+[submodule "TextKit_LineNumbers"]
+	path = TextKit_LineNumbers
+	url = https://github.com/ColdGrub1384/TextKit_LineNumbers.git
