@@ -194,7 +194,7 @@ class SplitViewController: UISplitViewController, UINavigationControllerDelegate
                     txtView.resignFirstResponder()
                     timer.invalidate()
                 }
-                
+                self.document?.warnings = [:]
                 self.document?.checkForErrors(files: FileManager.default.listFiles(path: self.document!.fileURL.path))
             })
         }

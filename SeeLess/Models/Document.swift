@@ -135,8 +135,8 @@ class Document: UIDocument {
             
             for file in files {
                 if file.pathExtension.lowercased() == "c" || file.pathExtension.lowercased() == "h" {
-                    warnings[file] = nil
-                    currentFile = file
+                    warnings[file.resolvingSymlinksInPath()] = nil
+                    currentFile = file.resolvingSymlinksInPath()
                     ios_system("clang -fcolor-diagnostics --config ../../configuration/configuration.txt -fsyntax-only \(file.path.replacingOccurrences(of: " ", with: "\\ ").replacingOccurrences(of: "'", with: "\\'").replacingOccurrences(of: "\"", with: "\\\""))")
                     sleep(UInt32(0.2))
                 }
