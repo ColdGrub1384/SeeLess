@@ -70,7 +70,6 @@
 		C92EB5A7233074DA00D53648 /* freetype.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C92EB5A42330749F00D53648 /* freetype.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C92EB5A9233074F700D53648 /* harfbuzz.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C92EB5A8233074F500D53648 /* harfbuzz.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C92EB5AB2330751300D53648 /* openblas.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C92EB5AA2330751200D53648 /* openblas.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C92EB5AE2330754300D53648 /* Python_ios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C92EB5AC2330752F00D53648 /* Python_ios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C92EB5D52331506E00D53648 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5D42331506E00D53648 /* FileManager.swift */; };
 		C941F2C2233815B200F89B8B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C941F2BC233815B200F89B8B /* README.md */; };
 		C97507012331A01600EBD06F /* BuildIssuesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97507002331A01600EBD06F /* BuildIssuesTableViewController.swift */; };
@@ -81,6 +80,7 @@
 		C988FE7023357AFA00305241 /* LineNumberTextViewWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C988FE6A23357AFA00305241 /* LineNumberTextViewWrapper.m */; };
 		C988FE7123357AFA00305241 /* LineNumberTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C988FE6C23357AFA00305241 /* LineNumberTextView.m */; };
 		C988FE7223357AFA00305241 /* LineNumberLayoutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C988FE6E23357AFA00305241 /* LineNumberLayoutManager.m */; };
+		C9AAA25F23396864004B7433 /* Python_ios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9AAA25E2339685F004B7433 /* Python_ios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C9D934972333E62B00A43462 /* QuickLookThumbnailing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9D934962333E62B00A43462 /* QuickLookThumbnailing.framework */; };
 		C9D9349A2333E62B00A43462 /* ThumbnailProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D934992333E62B00A43462 /* ThumbnailProvider.swift */; };
 		C9D9349E2333E62B00A43462 /* Thumbnail.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C9D934952333E62B00A43462 /* Thumbnail.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -191,7 +191,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C92EB5AE2330754300D53648 /* Python_ios.framework in Embed Frameworks */,
+				C9AAA25F23396864004B7433 /* Python_ios.framework in Embed Frameworks */,
 				C92EB5AB2330751300D53648 /* openblas.framework in Embed Frameworks */,
 				C92EB5A9233074F700D53648 /* harfbuzz.framework in Embed Frameworks */,
 				C92EB5A7233074DA00D53648 /* freetype.framework in Embed Frameworks */,
@@ -298,7 +298,6 @@
 		C92EB5A42330749F00D53648 /* freetype.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = freetype.framework; sourceTree = "<group>"; };
 		C92EB5A8233074F500D53648 /* harfbuzz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = harfbuzz.framework; sourceTree = "<group>"; };
 		C92EB5AA2330751200D53648 /* openblas.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = openblas.framework; sourceTree = "<group>"; };
-		C92EB5AC2330752F00D53648 /* Python_ios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Python_ios.framework; sourceTree = "<group>"; };
 		C92EB5D323313FBD00D53648 /* SeeLess-BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SeeLess-BridgingHeader.h"; sourceTree = "<group>"; };
 		C92EB5D42331506E00D53648 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		C941F2BC233815B200F89B8B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -313,6 +312,7 @@
 		C988FE6D23357AFA00305241 /* LineNumberTextViewWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineNumberTextViewWrapper.h; sourceTree = "<group>"; };
 		C988FE6E23357AFA00305241 /* LineNumberLayoutManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineNumberLayoutManager.m; sourceTree = "<group>"; };
 		C988FE6F23357AFA00305241 /* LineNumberTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineNumberTextView.h; sourceTree = "<group>"; };
+		C9AAA25E2339685F004B7433 /* Python_ios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Python_ios.framework; path = LibTerm/Python_ios.framework; sourceTree = SOURCE_ROOT; };
 		C9B3A8F82335AD04005B6F49 /* SeeLess.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SeeLess.entitlements; sourceTree = "<group>"; };
 		C9D934952333E62B00A43462 /* Thumbnail.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Thumbnail.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9D934962333E62B00A43462 /* QuickLookThumbnailing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLookThumbnailing.framework; path = System/Library/Frameworks/QuickLookThumbnailing.framework; sourceTree = SDKROOT; };
@@ -386,7 +386,7 @@
 		C92EB4CE23306E1F00D53648 /* ios_system */ = {
 			isa = PBXGroup;
 			children = (
-				C92EB5AC2330752F00D53648 /* Python_ios.framework */,
+				C9AAA25E2339685F004B7433 /* Python_ios.framework */,
 				C92EB5AA2330751200D53648 /* openblas.framework */,
 				C92EB5A8233074F500D53648 /* harfbuzz.framework */,
 				C92EB5A42330749F00D53648 /* freetype.framework */,
