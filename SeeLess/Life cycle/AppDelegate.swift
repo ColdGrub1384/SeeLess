@@ -60,6 +60,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // ios_system
         
+        // cacert.pem
+        let cacertNewURL = FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask)[0].appendingPathComponent("cacert.pem")
+        if let cacertURL = Bundle.main.url(forResource: "cacert", withExtension: "pem"), !FileManager.default.fileExists(atPath: cacertNewURL.path) {
+            try? FileManager.default.copyItem(at: cacertURL, to: cacertNewURL)
+        }
+        
         initializeEnvironment()
         replaceCommand("id", "id_main", true)
         sideLoading = true
