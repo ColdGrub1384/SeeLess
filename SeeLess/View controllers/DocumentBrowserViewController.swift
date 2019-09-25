@@ -50,6 +50,14 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         additionalLeadingNavigationBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(openSettings))]
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        #if targetEnvironment(simulator)
+        presentDocument(at: Bundle.main.url(forResource: "Hello World", withExtension: "cproj")!)
+        #endif
+    }
+    
     // MARK: Document browser view controller delegate
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
