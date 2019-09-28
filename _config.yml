@@ -42,7 +42,7 @@ features                                  :
 
   - title                                 : Multi files projects
     description                           : Create projects with multiple C Sources, Headers and libraries.
-    fontawesome_icon_name                 : fokder-icon
+    fontawesome_icon_name                 : fokder-open
 
   - title                                 : Code Editor
     description                           : Code editor with syntax highlighting and line numbers.
