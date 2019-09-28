@@ -58,6 +58,8 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        view.window?.windowScene?.title = ""
+        
         #if targetEnvironment(simulator)
         presentDocument(at: Bundle.main.url(forResource: "Hello World", withExtension: "cproj")!)
         #endif
