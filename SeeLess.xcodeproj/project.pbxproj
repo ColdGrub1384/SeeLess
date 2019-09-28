@@ -315,7 +315,7 @@
 		C988FE6D23357AFA00305241 /* LineNumberTextViewWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineNumberTextViewWrapper.h; sourceTree = "<group>"; };
 		C988FE6E23357AFA00305241 /* LineNumberLayoutManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineNumberLayoutManager.m; sourceTree = "<group>"; };
 		C988FE6F23357AFA00305241 /* LineNumberTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineNumberTextView.h; sourceTree = "<group>"; };
-		C995FB82233AE3D900A8D42C /* cacert.pem */ = {isa = PBXFileReference; lastKnownFileType = file; name = cacert.pem; path = LibTerm/LibTerm/cacert.pem; sourceTree = SOURCE_ROOT; };
+		C995FB82233AE3D900A8D42C /* cacert.pem */ = {isa = PBXFileReference; lastKnownFileType = text; name = cacert.pem; path = LibTerm/LibTerm/cacert.pem; sourceTree = SOURCE_ROOT; };
 		C995FB8B233AE45E00A8D42C /* screenshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = screenshot.swift; path = Commands/builtins/screenshot.swift; sourceTree = "<group>"; };
 		C995FB8D233AE5A000A8D42C /* Hello World.cproj */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "Hello World.cproj"; sourceTree = "<group>"; };
 		C9AAA25E2339685F004B7433 /* Python_ios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Python_ios.framework; path = LibTerm/Python_ios.framework; sourceTree = SOURCE_ROOT; };

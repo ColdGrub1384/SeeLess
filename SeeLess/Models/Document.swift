@@ -42,6 +42,29 @@ class Document: UIDocument {
     /// A boolean indicating if clang is analysing a project.
     static var isAnalyzing = false
     
+    /// A boolean indicating if the app is compiling a project.
+    static var isCompiling = false {
+        didSet {
+            DispatchQueue.main.async {
+                for window in UIApplication.shared.windows {
+                    guard let splitVC = window.rootViewController?.presentedViewController as? SplitViewController else {
+                        continue
+                    }
+                    
+                    guard let vc = (splitVC.viewControllers.first as? UINavigationController)?.topViewController else {
+                        continue
+                    }
+                    
+                    for item in vc.toolbarItems ?? [] {
+                        item.isEnabled = !self.isCompiling
+                    }
+                    
+                    vc.navigationItem.rightBarButtonItems?.first?.isEnabled = !self.isCompiling
+                }
+            }
+        }
+    }
+    
     /// Kills clang analyser.
     func killAnalyser() {
         Document.analyserQueue.async {
@@ -89,6 +112,7 @@ class Document: UIDocument {
         
         Document.analyserQueue.async {
             
+            Document.isCompiling = true
             Document.isAnalyzing = true
             
             var currentFile: URL!
@@ -129,15 +153,16 @@ class Document: UIDocument {
                 }
                 try? FileManager.default.createDirectory(at: cwd, withIntermediateDirectories: true, attributes: nil)
             }
-            ios_system("cd \(cwd.path.replacingOccurrences(of: " ", with: "\\ ").replacingOccurrences(of: "\"", with: "\\\"").replacingOccurrences(of: "'", with: "\\'"))")
+            
+            ios_setDirectoryURL(cwd)
             sleep(UInt32(0.2))
-            ios_system("pwd")
             
             for file in files {
                 if file.pathExtension.lowercased() == "c" || file.pathExtension.lowercased() == "h" {
                     warnings[file.resolvingSymlinksInPath()] = nil
                     currentFile = file.resolvingSymlinksInPath()
-                    ios_system("clang -fcolor-diagnostics --config ../../configuration/configuration.txt -fsyntax-only \(file.path.replacingOccurrences(of: " ", with: "\\ ").replacingOccurrences(of: "'", with: "\\'").replacingOccurrences(of: "\"", with: "\\\""))")
+                    ios_system("pwd")
+                    ios_system("clang -fcolor-diagnostics --config \(cwd.deletingLastPathComponent().deletingLastPathComponent().appendingPathComponent("configuration/configuration.txt").path.replacingOccurrences(of: " ", with: "\\ ").replacingOccurrences(of: "'", with: "\\'").replacingOccurrences(of: "\"", with: "\\\"")) -fsyntax-only \(file.path.replacingOccurrences(of: " ", with: "\\ ").replacingOccurrences(of: "'", with: "\\'").replacingOccurrences(of: "\"", with: "\\\""))")
                     sleep(UInt32(0.2))
                 }
             }
@@ -150,6 +175,7 @@ class Document: UIDocument {
             }
             
             Document.isAnalyzing = false
+            Document.isCompiling = false
         }
     }
     

@@ -200,11 +200,17 @@ class FileBrowserViewController: UITableViewController, UIDocumentPickerDelegate
                 terminal.navigationItem.leftBarButtonItems = [item]
                 terminal.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(showSettings))]
             }
-            let navVC = UINavigationController(rootViewController: terminal)
-            navVC.view.backgroundColor = .systemBackground
-            splitViewController?.showDetailViewController(navVC, sender: nil)
-            ios_setDirectoryURL(directory)
+            DispatchQueue.global().asyncAfter(deadline: .now()+0.5) {
+                terminal.shell.run(command: "cd \(self.directory.path.replacingOccurrences(of: " ", with: "\\ ").replacingOccurrences(of: "\"", with: "\\\"").replacingOccurrences(of: "'", with: "\\'"))", appendToHistory: false)
+                DispatchQueue.main.async {
+                    terminal.title = self.directory.lastPathComponent
+                }
+            }
         }
+        
+        let navVC = UINavigationController(rootViewController: terminal)
+        navVC.view.backgroundColor = .systemBackground
+        splitViewController?.showDetailViewController(navVC, sender: nil)
         
         DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: run)
     }
@@ -215,6 +221,7 @@ class FileBrowserViewController: UITableViewController, UIDocumentPickerDelegate
         super.viewWillAppear(animated)
         
         tableView.reloadData()
+        navigationItem.rightBarButtonItems?.first?.isEnabled = !Document.isCompiling
     }
     
     override func viewDidLoad() {

@@ -77,6 +77,7 @@ class SplitViewController: UISplitViewController, UINavigationControllerDelegate
         for item in (viewControllers.first as? UINavigationController)?.topViewController?.toolbarItems ?? [] {
             item.isEnabled = false
         }
+        Document.isCompiling = true
         
         terminal.shell.variables["PRODUCT_NAME"] = directory.deletingPathExtension().appendingPathExtension("bc").lastPathComponent.replacingOccurrences(of: " ", with: "-").replacingOccurrences(of: "'", with: "\\'").replacingOccurrences(of: "\"", with: "\\\"")
         terminal.shell.variables["CONFIG_DIR"] = directory.appendingPathComponent("configuration").path.replacingOccurrences(of: " ", with: "\\ ").replacingOccurrences(of: "'", with: "\\'").replacingOccurrences(of: "\"", with: "\\\"")
@@ -99,7 +100,7 @@ class SplitViewController: UISplitViewController, UINavigationControllerDelegate
             
             if let productName = terminal.shell.variables["PRODUCT_NAME"]?.replacingOccurrences(of: "\\ ", with: " ").replacingOccurrences(of: "\\'", with: "'").replacingOccurrences(of: "\\\"", with: "\""), FileManager.default.fileExists(atPath: directory.appendingPathComponent("build/\(productName)").path) {
                 
-                ios_setDirectoryURL(directory.appendingPathComponent("build"))
+                ios_system("cd \(directory.appendingPathComponent("build").path.replacingOccurrences(of: " ", with: "\\ ").replacingOccurrences(of: "\"", with: "\\\"").replacingOccurrences(of: "'", with: "\\'"))")
                 
                 for file in FileManager.default.listFiles(path: directory.path) {
                     if file.pathExtension.lowercased() == "h" || file.pathExtension.lowercased() == "hpp", let path = file.relativePath(from: directory)  {
@@ -135,6 +136,8 @@ class SplitViewController: UISplitViewController, UINavigationControllerDelegate
                     item.isEnabled = true
                 }
             }
+            
+            Document.isCompiling = false
         }
     }
     
