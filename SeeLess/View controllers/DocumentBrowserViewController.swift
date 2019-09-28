@@ -36,6 +36,11 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         presentedViewController?.present(navVC, animated: true, completion: nil)
     }
     
+    /// Closes presented View controller
+    @objc func close() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: - Document browser view controller
     
     override func viewDidLoad() {
@@ -190,6 +195,26 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
             present(navVC, animated: true, completion: {
                 DispatchQueue.main.asyncAfter(deadline: .now()+1, execute: run)
             })
+        } else if let editor = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "Editor") as? EditorViewController {
+            
+            guard documentURL.startAccessingSecurityScopedResource() else {
+                return
+            }
+            
+            guard let str = (try? String(contentsOf: documentURL)) else {
+                return documentURL.stopAccessingSecurityScopedResource()
+            }
+            
+            editor.text = str
+            editor.document = documentURL
+            editor.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(close))
+            
+            let navVC = UINavigationController(rootViewController: editor)
+            navVC.view.backgroundColor = .systemBackground
+            navVC.modalPresentationStyle = .fullScreen
+            navVC.view.tintColor = .systemOrange
+            
+            present(navVC, animated: true, completion: nil)
         }
     }
     
