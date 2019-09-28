@@ -50,11 +50,24 @@ class FileBrowserViewController: UITableViewController, UIDocumentPickerDelegate
         }
     }
     
+    /// The C project.
+    var document: Document?
+    
     /// Loads directory.
     func load() {
         tableView.backgroundView = nil
         do {
-            files = try FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil, options: [])
+            var files = try FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil, options: [])
+            let projURL = document?.fileURL.resolvingSymlinksInPath()
+            
+            for file in files {
+                if file.resolvingSymlinksInPath() == projURL?.appendingPathComponent("configuration/build.sh") || file.resolvingSymlinksInPath() == projURL?.appendingPathComponent("configuration/find_sources.py"), let i = files.firstIndex(of: file) {
+                    files.remove(at: i)
+                }
+            }
+            
+            self.files = files
+            
             tableView.reloadData()
         } catch {
             files = []
@@ -269,6 +282,7 @@ class FileBrowserViewController: UITableViewController, UIDocumentPickerDelegate
         var isDir: ObjCBool = false
         if FileManager.default.fileExists(atPath: files[indexPath.row].path, isDirectory: &isDir) && isDir.boolValue {
             let browser = FileBrowserViewController()
+            browser.document = document
             browser.directory = files[indexPath.row]
             navigationController?.pushViewController(browser, animated: true)
         } else if let editor = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "Editor") as? EditorViewController {

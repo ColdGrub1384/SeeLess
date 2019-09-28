@@ -170,6 +170,7 @@ class SplitViewController: UISplitViewController, UINavigationControllerDelegate
         
         if !appeared {
             let browserVC = FileBrowserViewController()
+            browserVC.document = document
             browserVC.directory = self.document?.fileURL
             browserVC.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.close))
             browserVC.toolbarItems = [
