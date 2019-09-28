@@ -195,8 +195,15 @@ class SplitViewController: UISplitViewController, UINavigationControllerDelegate
                     timer.invalidate()
                 }
                 self.document?.warnings = [:]
-                self.document?.checkForErrors(files: FileManager.default.listFiles(path: self.document!.fileURL.path))
+                
+                DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
+                    self.document?.checkForErrors(files: FileManager.default.listFiles(path: self.document!.fileURL.path))
+                }
             })
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
+                self.document?.checkForErrors(files: FileManager.default.listFiles(path: self.document!.fileURL.path))
+            }
         }
         
         appeared = true
