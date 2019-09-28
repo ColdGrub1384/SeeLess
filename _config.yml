@@ -37,8 +37,8 @@ youtube_username                          :
 features                                  :
     
   - title                                 : LLVM
-  description                             : You can compile C code into LLVM IR format with clang and interpret it with the lli command.
-  fontawesome_icon_name                   : magic
+    description                           : You can compile C code into LLVM IR format with clang and interpret it with the lli command.
+    fontawesome_icon_name                 : magic
 
   - title                                 : Multi files projects
     description                           : Create projects with multiple C Sources, Headers and libraries.
@@ -52,7 +52,7 @@ features                                  :
     description                           : A terminal is included for running commands and your projects.
     fontawesome_icon_name                 : terminal
     
-    - title                               : Use your commands
+  - title                                 : Use your commands
     description                           : Install your commands in <a href="https://libterm.app">LibTerm</a>.
     fontawesome_icon_name                 : share
 
