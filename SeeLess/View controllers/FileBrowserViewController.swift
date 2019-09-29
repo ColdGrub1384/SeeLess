@@ -61,7 +61,10 @@ class FileBrowserViewController: UITableViewController, UIDocumentPickerDelegate
             let projURL = document?.fileURL.resolvingSymlinksInPath()
             
             for file in files {
-                if file.resolvingSymlinksInPath() == projURL?.appendingPathComponent("configuration/build.sh") || file.resolvingSymlinksInPath() == projURL?.appendingPathComponent("configuration/find_sources.py"), let i = files.firstIndex(of: file) {
+                if file.resolvingSymlinksInPath() == projURL?.appendingPathComponent("configuration/build.sh") ||
+                    file.resolvingSymlinksInPath() == projURL?.appendingPathComponent("configuration/find_sources.py") ||
+                    file.resolvingSymlinksInPath().lastPathComponent.hasPrefix(".git"),
+                    let i = files.firstIndex(of: file) {
                     files.remove(at: i)
                 }
             }
