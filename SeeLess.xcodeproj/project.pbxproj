@@ -72,10 +72,11 @@
 		C92EB5AB2330751300D53648 /* openblas.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C92EB5AA2330751200D53648 /* openblas.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C92EB5D52331506E00D53648 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5D42331506E00D53648 /* FileManager.swift */; };
 		C941F2C2233815B200F89B8B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C941F2BC233815B200F89B8B /* README.md */; };
+		C97212E62341400E0073AE5D /* usr.zip in Resources */ = {isa = PBXBuildFile; fileRef = C97212E52341400E0073AE5D /* usr.zip */; };
+		C97212E8234152390073AE5D /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97212E7234152390073AE5D /* UITextView.swift */; };
 		C97507012331A01600EBD06F /* BuildIssuesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97507002331A01600EBD06F /* BuildIssuesTableViewController.swift */; };
 		C988676B2336B1C0006BC653 /* python27.zip in Resources */ = {isa = PBXBuildFile; fileRef = C9470CB02335B3BD0044F7E0 /* python27.zip */; };
 		C988676C2336B1C3006BC653 /* python37.zip in Resources */ = {isa = PBXBuildFile; fileRef = C9470CAB2335B3B40044F7E0 /* python37.zip */; };
-		C988676D2336B1C7006BC653 /* usr.zip in Resources */ = {isa = PBXBuildFile; fileRef = C9470CAF2335B3BD0044F7E0 /* usr.zip */; };
 		C988676E2336B1C9006BC653 /* commandDictionary.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9470CB12335B3BD0044F7E0 /* commandDictionary.plist */; };
 		C988FE7023357AFA00305241 /* LineNumberTextViewWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C988FE6A23357AFA00305241 /* LineNumberTextViewWrapper.m */; };
 		C988FE7123357AFA00305241 /* LineNumberTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C988FE6C23357AFA00305241 /* LineNumberTextView.m */; };
@@ -305,9 +306,10 @@
 		C92EB5D42331506E00D53648 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		C941F2BC233815B200F89B8B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C9470CAB2335B3B40044F7E0 /* python37.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = python37.zip; sourceTree = "<group>"; };
-		C9470CAF2335B3BD0044F7E0 /* usr.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = usr.zip; path = LibTerm/LibTerm/usr.zip; sourceTree = SOURCE_ROOT; };
 		C9470CB02335B3BD0044F7E0 /* python27.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = python27.zip; path = LibTerm/LibTerm/python27.zip; sourceTree = SOURCE_ROOT; };
 		C9470CB12335B3BD0044F7E0 /* commandDictionary.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = commandDictionary.plist; path = LibTerm/LibTerm/commandDictionary.plist; sourceTree = SOURCE_ROOT; };
+		C97212E52341400E0073AE5D /* usr.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = usr.zip; sourceTree = "<group>"; };
+		C97212E7234152390073AE5D /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		C97507002331A01600EBD06F /* BuildIssuesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildIssuesTableViewController.swift; sourceTree = "<group>"; };
 		C988FE6A23357AFA00305241 /* LineNumberTextViewWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineNumberTextViewWrapper.m; sourceTree = "<group>"; };
 		C988FE6B23357AFA00305241 /* LineNumberLayoutManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineNumberLayoutManager.h; sourceTree = "<group>"; };
@@ -527,6 +529,7 @@
 			children = (
 				C9E2A1C72334656500A6B471 /* URL.swift */,
 				C92EB5D42331506E00D53648 /* FileManager.swift */,
+				C97212E7234152390073AE5D /* UITextView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -535,13 +538,13 @@
 			isa = PBXGroup;
 			children = (
 				C92EB5D323313FBD00D53648 /* SeeLess-BridgingHeader.h */,
+				C97212E52341400E0073AE5D /* usr.zip */,
 				C92EB43223302F9800D53648 /* langs.plist */,
 				C9E2A892232EF02B0004F55B /* Main.storyboard */,
 				C9E2A895232EF02B0004F55B /* Assets.xcassets */,
 				C9E2A897232EF02B0004F55B /* LaunchScreen.storyboard */,
 				C9E2A89A232EF02B0004F55B /* Info.plist */,
 				C9470CB12335B3BD0044F7E0 /* commandDictionary.plist */,
-				C9470CAF2335B3BD0044F7E0 /* usr.zip */,
 				C9470CB02335B3BD0044F7E0 /* python27.zip */,
 				C9470CAB2335B3B40044F7E0 /* python37.zip */,
 				C9E2A8BF23300C9D0004F55B /* Untitled.cproj */,
@@ -795,12 +798,12 @@
 			files = (
 				C9E2A899232EF02B0004F55B /* LaunchScreen.storyboard in Resources */,
 				C9E2A1CF23351F5600A6B471 /* Settings.bundle in Resources */,
+				C97212E62341400E0073AE5D /* usr.zip in Resources */,
 				C9E2A896232EF02B0004F55B /* Assets.xcassets in Resources */,
 				C988676C2336B1C3006BC653 /* python37.zip in Resources */,
 				C92EB43323302F9800D53648 /* langs.plist in Resources */,
 				C988676E2336B1C9006BC653 /* commandDictionary.plist in Resources */,
 				C92EB5A12330739A00D53648 /* Terminal.storyboard in Resources */,
-				C988676D2336B1C7006BC653 /* usr.zip in Resources */,
 				C9E2A894232EF02B0004F55B /* Main.storyboard in Resources */,
 				C995FB8E233AE5A000A8D42C /* Hello World.cproj in Resources */,
 				C995FB83233AE3D900A8D42C /* cacert.pem in Resources */,
@@ -924,6 +927,7 @@
 				C92EB5612330715400D53648 /* TerminalViewController.swift in Sources */,
 				C995FB8C233AE45E00A8D42C /* screenshot.swift in Sources */,
 				C92EB5602330715400D53648 /* TerminalTabViewController.swift in Sources */,
+				C97212E8234152390073AE5D /* UITextView.swift in Sources */,
 				C92EB55B2330714100D53648 /* help.swift in Sources */,
 				C92EB5932330720E00D53648 /* package.swift in Sources */,
 				C988FE7123357AFA00305241 /* LineNumberTextView.m in Sources */,
@@ -1151,6 +1155,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_MEMORY_MANAGEMENT = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SeeLess/SeeLess.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -1186,6 +1191,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_MEMORY_MANAGEMENT = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SeeLess/SeeLess.entitlements;
 				CODE_SIGN_STYLE = Automatic;
