@@ -57,7 +57,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let url = URLContexts.first?.url else { return }
         
-        open(fileURL: url)
+        if window?.rootViewController?.presentedViewController != nil {
+            window?.rootViewController?.dismiss(animated: true, completion: {
+                self.open(fileURL: url)
+            })
+        } else {
+            open(fileURL: url)
+        }
     }
     
     func stateRestorationActivity(for scene: UIScene) -> NSUserActivity? {
