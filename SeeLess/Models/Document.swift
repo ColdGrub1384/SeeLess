@@ -161,8 +161,7 @@ class Document: UIDocument {
                 if file.pathExtension.lowercased() == "c" || file.pathExtension.lowercased() == "h" {
                     warnings[file.resolvingSymlinksInPath()] = nil
                     currentFile = file.resolvingSymlinksInPath()
-                    ios_system("pwd")
-                    ios_system("clang -fcolor-diagnostics --config \(cwd.deletingLastPathComponent().deletingLastPathComponent().appendingPathComponent("configuration/configuration.txt").path.replacingOccurrences(of: " ", with: "\\ ").replacingOccurrences(of: "'", with: "\\'").replacingOccurrences(of: "\"", with: "\\\"")) -fsyntax-only \(file.path.replacingOccurrences(of: " ", with: "\\ ").replacingOccurrences(of: "'", with: "\\'").replacingOccurrences(of: "\"", with: "\\\""))")
+                    ios_system("clang -working-directory=\(cwd.path.replacingOccurrences(of: " ", with: "\\ ").replacingOccurrences(of: "'", with: "\\'").replacingOccurrences(of: "\"", with: "\\\"")) -fcolor-diagnostics --config \(cwd.deletingLastPathComponent().deletingLastPathComponent().appendingPathComponent("configuration/configuration.txt").path.replacingOccurrences(of: " ", with: "\\ ").replacingOccurrences(of: "'", with: "\\'").replacingOccurrences(of: "\"", with: "\\\"")) -fsyntax-only \(file.path.replacingOccurrences(of: " ", with: "\\ ").replacingOccurrences(of: "'", with: "\\'").replacingOccurrences(of: "\"", with: "\\\""))")
                     sleep(UInt32(0.2))
                 }
             }
