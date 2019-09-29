@@ -252,6 +252,31 @@ class EditorViewController: UIViewController, UITextViewDelegate {
         if text == "\t" {
             textView.insertText(UserDefaults.standard.string(forKey: "indentation") ?? "    ")
         }
+        
+        if text == "\n", var currentLine = textView.currentLine, let currentLineRange = textView.currentLineRange, let selectedRange = textView.selectedTextRange {
+            
+            if selectedRange.start == currentLineRange.start {
+                return true
+            }
+            
+            var spaces = ""
+            while currentLine.hasPrefix(" ") {
+                currentLine.removeFirst()
+                spaces += " "
+            }
+            while currentLine.hasPrefix("\t") {
+                currentLine.removeFirst()
+                spaces += "\t"
+            }
+            
+            if currentLine.replacingOccurrences(of: " ", with: "").hasSuffix("{") {
+                spaces += UserDefaults.standard.string(forKey: "indentation") ?? "    "
+            }
+            
+            textView.insertText("\n"+spaces)
+            return false
+        }
+        
         return text != "\t"
     }
 }
