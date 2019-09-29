@@ -55,7 +55,7 @@ class BuildIssuesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
         cell.textLabel?.text = files[indexPath.row].lastPathComponent
-        cell.detailTextLabel?.text = String(issues[indexPath.row].dropLast(1)).components(separatedBy: "\n").last?.components(separatedBy: "[0m").last
+        cell.detailTextLabel?.text = String(issues[indexPath.row].dropLast(1)).components(separatedBy: "\n").last?.components(separatedBy: "[0m").last?.replacingOccurrences(of: "[0", with: "")
         
         var isDir: ObjCBool = false
         if FileManager.default.fileExists(atPath: files[indexPath.row].path, isDirectory: &isDir) && isDir.boolValue {
