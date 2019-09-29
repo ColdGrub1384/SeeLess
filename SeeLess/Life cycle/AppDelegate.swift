@@ -39,7 +39,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let zipPath =  Bundle.main.path(forResource: "usr", ofType: "zip") {
             DispatchQueue.global().async {
+                Document.isCompiling = true
                 SSZipArchive.unzipFile(atPath: zipPath, toDestination: usrURL.deletingLastPathComponent().path, progressHandler: nil) { (_, success, error) in
+                    
+                    Document.isCompiling = false
+                    
                     if let error = error {
                         print(error.localizedDescription)
                     }
