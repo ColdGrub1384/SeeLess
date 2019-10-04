@@ -43,10 +43,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.scene(scene, openURLContexts: connectionOptions.urlContexts)
         }
         
-        if let userActivity = session.stateRestorationActivity, let bookmarkData = userActivity.userInfo?["bookmarkData"] as? Data {
+        if let userActivity = session.stateRestorationActivity ?? connectionOptions.userActivities.first, let bookmarkData = userActivity.userInfo?["bookmarkData"] as? Data {
             do {
                 var isStale = false
-                open(fileURL: try URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isStale))
+                (window?.rootViewController as? DocumentBrowserViewController)?.documentURL = try URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isStale)
             } catch {
                 print(error.localizedDescription)
             }
@@ -77,6 +77,42 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return userActivity
         } catch {
             return nil
+        }
+    }
+    
+    @available(iOS 13.0, *)
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        
+        let root = window?.rootViewController
+        
+        func runProgram() {
+            if let data = userActivity.userInfo?["bookmarkData"] as? Data {
+                do {
+                    var isStale = false
+                    let url = try URL(resolvingBookmarkData: data, bookmarkDataIsStale: &isStale)
+                    
+                    _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
+                        if let doc = self.window?.rootViewController as? DocumentBrowserViewController {
+                            doc.revealDocument(at: url, importIfNeeded: true) { (url_, _) in
+                                doc.presentDocument(at: url_ ?? url, arguments: userActivity.userInfo?["arguments"] as? String)
+                            }
+                            timer.invalidate()
+                        }
+                    })
+                } catch {
+                    let alert = UIAlertController(title: "Error reading file!", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                    root?.present(alert, animated: true, completion: nil)
+                }
+            }
+        }
+        
+        if root?.presentedViewController != nil {
+            root?.dismiss(animated: true, completion: {
+                runProgram()
+            })
+        } else {
+            runProgram()
         }
     }
 }

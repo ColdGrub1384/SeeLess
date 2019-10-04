@@ -41,6 +41,9 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         dismiss(animated: true, completion: nil)
     }
     
+    /// The document that will be opened on `viewDidAppear(_:)`.
+    var documentURL: URL?
+    
     // MARK: - Document browser view controller
     
     override func viewDidLoad() {
@@ -59,6 +62,11 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         super.viewDidAppear(animated)
         
         view.window?.windowScene?.title = ""
+        
+        if let docURL = documentURL {
+            presentDocument(at: docURL)
+            documentURL = nil
+        }
         
         #if targetEnvironment(simulator)
         presentDocument(at: Bundle.main.url(forResource: "Hello World", withExtension: "cproj")!)
@@ -118,7 +126,8 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     ///
     /// - Parameters:
     ///     - documentURL: The URL of the doucment to open.
-    func presentDocument(at documentURL: URL) {
+    ///     - arguments: Arguments to pass to the program if the passed file is a program.
+    func presentDocument(at documentURL: URL, arguments: String? = nil) {
         
         if documentURL.pathExtension.lowercased() == "cproj" {
             let doc = Document(fileURL: documentURL)
@@ -182,7 +191,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
                     terminal.isAskingForInput = false
                     
                     let path = documentURL.path.replacingOccurrences(of: " ", with: "\\ ").replacingOccurrences(of: "\"", with: "\\\"").replacingOccurrences(of: "'", with: "\\'")
-                    terminal.shell.run(command: "echo lli \(path); lli \(path)")
+                    terminal.shell.run(command: "echo lli \(path)\(arguments != nil && !arguments!.isEmpty ? " "+arguments! : ""); lli \(path)\(arguments != nil && !arguments!.isEmpty ? " "+arguments! : "")")
                     sleep(1)
                     terminal.shell.run(command: "echo ''; echo Exited with status code: $?")
                     
