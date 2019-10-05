@@ -22,7 +22,7 @@
 			<key>INIntentConfigurable</key>
 			<true/>
 			<key>INIntentDescription</key>
-			<string>Runs a Python script</string>
+			<string>Runs a compiled program</string>
 			<key>INIntentDescriptionID</key>
 			<string>fYwWoa</string>
 			<key>INIntentIneligibleForSuggestions</key>
