@@ -71,6 +71,7 @@
 		C92EB5A9233074F700D53648 /* harfbuzz.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C92EB5A8233074F500D53648 /* harfbuzz.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C92EB5AB2330751300D53648 /* openblas.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C92EB5AA2330751200D53648 /* openblas.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C92EB5D52331506E00D53648 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5D42331506E00D53648 /* FileManager.swift */; };
+		C93F77AA236C9AB10036D151 /* ReviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93F77A9236C9AB10036D151 /* ReviewHelper.swift */; };
 		C941F2C2233815B200F89B8B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C941F2BC233815B200F89B8B /* README.md */; };
 		C96A7C3A23417DB200E32D4E /* ios_system.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C92EB48A23306DCD00D53648 /* ios_system.framework */; };
 		C96A7C3B2341812600E32D4E /* commandDictionary.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9470CB12335B3BD0044F7E0 /* commandDictionary.plist */; };
@@ -89,8 +90,8 @@
 		C988FE7123357AFA00305241 /* LineNumberTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C988FE6C23357AFA00305241 /* LineNumberTextView.m */; };
 		C988FE7223357AFA00305241 /* LineNumberLayoutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C988FE6E23357AFA00305241 /* LineNumberLayoutManager.m */; };
 		C995FB83233AE3D900A8D42C /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = C995FB82233AE3D900A8D42C /* cacert.pem */; };
-		C995FB8C233AE45E00A8D42C /* screenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C995FB8B233AE45E00A8D42C /* screenshot.swift */; };
 		C995FB8E233AE5A000A8D42C /* Hello World.cproj in Resources */ = {isa = PBXBuildFile; fileRef = C995FB8D233AE5A000A8D42C /* Hello World.cproj */; };
+		C99FDFEA234A5C350022685B /* screenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99FDFE9234A5C350022685B /* screenshot.swift */; };
 		C9AAA25F23396864004B7433 /* Python_ios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9AAA25E2339685F004B7433 /* Python_ios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C9BA1DCD2348014A000FA9D4 /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = C995FB82233AE3D900A8D42C /* cacert.pem */; };
 		C9BA1DCE23480199000FA9D4 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5472330711000D53648 /* String.swift */; };
@@ -322,6 +323,7 @@
 		C92EB5AA2330751200D53648 /* openblas.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = openblas.framework; sourceTree = "<group>"; };
 		C92EB5D323313FBD00D53648 /* SeeLess-BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SeeLess-BridgingHeader.h"; sourceTree = "<group>"; };
 		C92EB5D42331506E00D53648 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		C93F77A9236C9AB10036D151 /* ReviewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHelper.swift; sourceTree = "<group>"; };
 		C941F2BC233815B200F89B8B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C9470CAB2335B3B40044F7E0 /* python37.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = python37.zip; sourceTree = "<group>"; };
 		C9470CB02335B3BD0044F7E0 /* python27.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = python27.zip; path = LibTerm/LibTerm/python27.zip; sourceTree = SOURCE_ROOT; };
@@ -341,8 +343,8 @@
 		C988FE6E23357AFA00305241 /* LineNumberLayoutManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineNumberLayoutManager.m; sourceTree = "<group>"; };
 		C988FE6F23357AFA00305241 /* LineNumberTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineNumberTextView.h; sourceTree = "<group>"; };
 		C995FB82233AE3D900A8D42C /* cacert.pem */ = {isa = PBXFileReference; lastKnownFileType = text; name = cacert.pem; path = LibTerm/LibTerm/cacert.pem; sourceTree = SOURCE_ROOT; };
-		C995FB8B233AE45E00A8D42C /* screenshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = screenshot.swift; path = Commands/builtins/screenshot.swift; sourceTree = "<group>"; };
 		C995FB8D233AE5A000A8D42C /* Hello World.cproj */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "Hello World.cproj"; sourceTree = "<group>"; };
+		C99FDFE9234A5C350022685B /* screenshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = screenshot.swift; sourceTree = "<group>"; };
 		C9AAA25E2339685F004B7433 /* Python_ios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Python_ios.framework; path = LibTerm/Python_ios.framework; sourceTree = SOURCE_ROOT; };
 		C9B3A8F82335AD04005B6F49 /* SeeLess.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SeeLess.entitlements; sourceTree = "<group>"; };
 		C9BA1DCF23480683000FA9D4 /* input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
@@ -477,7 +479,6 @@
 				C92EB5942330722200D53648 /* ssh.swift */,
 				C92EB5902330720E00D53648 /* credits.swift */,
 				C92EB5912330720E00D53648 /* package.swift */,
-				C995FB8B233AE45E00A8D42C /* screenshot.swift */,
 				C92EB5522330712800D53648 /* id.c */,
 				C92EB5442330711000D53648 /* ANSITextState.swift */,
 				C92EB5422330711000D53648 /* BuildDate.swift */,
@@ -552,6 +553,7 @@
 			children = (
 				C9E2A890232EF02B0004F55B /* Document.swift */,
 				C92EB4392330305C00D53648 /* TextDocument.swift */,
+				C93F77A9236C9AB10036D151 /* ReviewHelper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -657,6 +659,7 @@
 			isa = PBXGroup;
 			children = (
 				C9B3A8F82335AD04005B6F49 /* SeeLess.entitlements */,
+				C99FDFE9234A5C350022685B /* screenshot.swift */,
 				C9470CA02335B33D0044F7E0 /* Life cycle */,
 				C9470CA62335B3610044F7E0 /* View controllers */,
 				C9470CA72335B37C0044F7E0 /* Models */,
@@ -1006,15 +1009,16 @@
 				C92EB58D233071D100D53648 /* LibShell.swift in Sources */,
 				C9E2A1C82334656500A6B471 /* URL.swift in Sources */,
 				C92EB5922330720E00D53648 /* credits.swift in Sources */,
+				C99FDFEA234A5C350022685B /* screenshot.swift in Sources */,
 				C92EB5D52331506E00D53648 /* FileManager.swift in Sources */,
 				C92EB58B233071C900D53648 /* TerminalTextView.swift in Sources */,
 				C92EB54E2330711000D53648 /* CommandHelp.swift in Sources */,
 				C92EB54F2330711000D53648 /* String.swift in Sources */,
 				C92EB59B2330727000D53648 /* Commands.swift in Sources */,
+				C93F77AA236C9AB10036D151 /* ReviewHelper.swift in Sources */,
 				C92EB5952330722200D53648 /* ssh.swift in Sources */,
 				C92EB55D2330714100D53648 /* edit.swift in Sources */,
 				C92EB5612330715400D53648 /* TerminalViewController.swift in Sources */,
-				C995FB8C233AE45E00A8D42C /* screenshot.swift in Sources */,
 				C92EB5602330715400D53648 /* TerminalTabViewController.swift in Sources */,
 				C97212E8234152390073AE5D /* UITextView.swift in Sources */,
 				C92EB55B2330714100D53648 /* help.swift in Sources */,
@@ -1094,6 +1098,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = "SeeLess Intents/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1113,6 +1118,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = "SeeLess Intents/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1132,7 +1138,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = Thumbnail/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1152,7 +1158,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = Thumbnail/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1292,7 +1298,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SeeLess/SeeLess.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1328,7 +1334,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SeeLess/SeeLess.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

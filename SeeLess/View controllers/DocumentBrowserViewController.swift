@@ -71,6 +71,8 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         #if targetEnvironment(simulator)
         presentDocument(at: Bundle.main.url(forResource: "Hello World", withExtension: "cproj")!)
         #endif
+        
+        ReviewHelper.shared.requestReview()
     }
     
     // MARK: Document browser view controller delegate

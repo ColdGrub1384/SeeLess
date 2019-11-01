@@ -78,6 +78,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SettingsTableViewController.fontSize.integerValue = 14
         }
         
+        ReviewHelper.shared.launches += 1
+        
         return true
     }
 }
