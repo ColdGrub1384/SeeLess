@@ -151,6 +151,7 @@ class SplitViewController: UISplitViewController, UINavigationControllerDelegate
         var configuration = LTTerminalViewController.Preferences()
         configuration.barStyle = .default
         terminal = LTTerminalViewController.makeTerminal(preferences: configuration, shell: LibShell())
+        terminal.edgesForExtendedLayout = []
         
         view.tintColor = .systemOrange
         preferredDisplayMode = .allVisible

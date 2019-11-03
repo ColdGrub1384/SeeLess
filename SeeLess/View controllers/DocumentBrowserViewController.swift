@@ -167,6 +167,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
             var configuration = LTTerminalViewController.Preferences()
             configuration.barStyle = .default
             let terminal = LTTerminalViewController.makeTerminal(preferences: configuration, shell: LibShell())
+            terminal.edgesForExtendedLayout = []
             
             FileBrowserViewController.terminals.append(terminal)
             
