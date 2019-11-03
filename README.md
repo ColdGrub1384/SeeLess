@@ -1,4 +1,10 @@
+![](https://github.com/ColdGrub1384/SeeLess/raw/master/SeeLess/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5%402x.png)
+
 # SeeLess
+
+[![Download on the App Store](https://pisth.github.io/appstorebadge.svg)](https://apps.apple.com/us/app/seeless-c-compiler/id1481018071?uo=4)
+
+<img src="https://seeless.app/assets/screenshot/Screenshot.png" width=300px>
 
 SeeLess is a C IDE for iOS that integrates with LibTerm. SeeLess allows you to code commands with C and install them in LibTerm.
 
