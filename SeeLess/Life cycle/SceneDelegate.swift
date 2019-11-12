@@ -18,19 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func open(fileURL: URL) {
         guard fileURL.isFileURL else { return }
                 
-        // Reveal / import the document at the URL
-        guard let documentBrowserViewController = window?.rootViewController as? DocumentBrowserViewController else { return }
+        guard let documentBrowserViewController = (window?.rootViewController as? UINavigationController)?.visibleViewController as? DocumentBrowserViewController else { return }
 
-        documentBrowserViewController.revealDocument(at: fileURL, importIfNeeded: true) { (revealedDocumentURL, error) in
-            if let error = error {
-                // Handle the error appropriately
-                print("Failed to reveal the document at URL \(fileURL) with error: '\(error)'")
-                return
-            }
-            
-            // Present the Document View Controller for the revealed URL
-            documentBrowserViewController.presentDocument(at: revealedDocumentURL!)
-        }
+        documentBrowserViewController.presentDocument(at: fileURL)
     }
     
     // MARK: - Window scene delegate
@@ -93,9 +83,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     
                     _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
                         if let doc = self.window?.rootViewController as? DocumentBrowserViewController {
-                            doc.revealDocument(at: url, importIfNeeded: true) { (url_, _) in
-                                doc.presentDocument(at: url_ ?? url, arguments: userActivity.userInfo?["arguments"] as? String)
-                            }
+                            doc.presentDocument(at: url, arguments: userActivity.userInfo?["arguments"] as? String)
                             timer.invalidate()
                         }
                     })

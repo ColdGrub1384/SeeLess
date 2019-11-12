@@ -118,10 +118,12 @@ class SplitViewController: UISplitViewController, UINavigationControllerDelegate
                 }
                 
                 if (sender is UIBarButtonItem && (sender as! UIBarButtonItem).title?.isEmpty != false) || (sender is UIKeyCommand && (sender as! UIKeyCommand).input == "r") {
-                    terminal.shell.run(command: "echo Running $PRODUCT_NAME...; echo")
+                    terminal.shell.run(command: "echo Running $PRODUCT_NAME...")
+                    terminal.shell.run(command: "echo")
                     terminal.shell.run(command: "lli $PRODUCT_NAME")
                     sleep(UInt32(1))
-                    terminal.shell.run(command: "echo ''; echo Exited with status code: $?")
+                    terminal.shell.run(command: "echo")
+                    terminal.shell.run(command: "echo Exited with status code: $?")
                     
                     terminal.shell.history = terminal.shell.history.dropLast(3)
                 }

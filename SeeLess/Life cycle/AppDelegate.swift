@@ -29,6 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+        URLSession.shared.dataTask(with: URL(string: "https://seeless.app/disable_iCloud")!) { (data, response, error) in
+            if data == nil || response == nil || error != nil {
+                DocumentBrowserViewController.iCloud = nil
+            }
+        }.resume()
+        
         // clang
         
         let usrURL = FileManager.default.urls(for: .libraryDirectory, in: .allDomainsMask)[0].appendingPathComponent("usr")

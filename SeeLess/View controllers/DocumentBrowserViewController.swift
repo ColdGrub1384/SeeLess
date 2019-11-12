@@ -17,13 +17,128 @@ fileprivate extension LTTerminalViewController {
 }
 
 /// The document browser.
-class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate, UIViewControllerTransitioningDelegate {
+class DocumentBrowserViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
     
-    private var transitionController: UIDocumentBrowserTransitionController?
+    /// A folder containing projects.
+    class Folder: UIDocument {
+        
+        /// Reloads directory.
+        func reloadDirectory() {
+            DispatchQueue.main.async {
+                for scene in UIApplication.shared.connectedScenes {
+                    for window in (scene as? UIWindowScene)?.windows ?? [] {
+                        if let navVC = window.rootViewController as? UINavigationController, let vc = navVC.visibleViewController as? DocumentBrowserViewController {
+                            vc.reload()
+                        }
+                    }
+                }
+            }
+        }
+        
+        // MARK: - Document
+        
+        override func contents(forType typeName: String) throws -> Any {
+            // Encode your document with an instance of NSData or NSFileWrapper
+            return Data()
+        }
+        
+        override func load(fromContents contents: Any, ofType typeName: String?) throws {
+            // Load your document from contents
+        }
+        
+        override func presentedItemDidChange() {
+            super.presentedItemDidChange()
+            
+            reloadDirectory()
+        }
+        
+        override func accommodatePresentedSubitemDeletion(at url: URL, completionHandler: @escaping (Error?) -> Void) {
+            completionHandler(nil)
+            
+            reloadDirectory()
+        }
+        
+        override func presentedSubitemDidAppear(at url: URL) {
+            reloadDirectory()
+        }
+        
+        override func presentedSubitemDidChange(at url: URL) {
+            reloadDirectory()
+        }
+        
+        override func presentedSubitem(at oldURL: URL, didMoveTo newURL: URL) {
+            reloadDirectory()
+        }
+    }
+    
+    /// The local scripts directory.
+    static let local = { () -> DocumentBrowserViewController.Folder in
+        let folder = Folder(fileURL: FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask)[0])
+        folder.open(completionHandler: nil)
+        return folder
+    }()
+    
+    /// The iCloud folder.
+    static var iCloud = { () -> DocumentBrowserViewController.Folder? in
+                
+        guard let iCloud = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents") else {
+            return nil
+        }
+        
+        let folder = Folder(fileURL: iCloud)
+        folder.open(completionHandler: nil)
+        return folder
+    }()
+    
+    /// The current directory.
+    var directory: URL = DocumentBrowserViewController.local.fileURL {
+        didSet {
+            navigationItem.largeTitleDisplayMode = .never
+        }
+    }
+    
+    /// Files in `directory`.
+    var files = [URL]()
+    
+    /// Files found with search.
+    var filtredFiles: [URL]?
+    
+    /// The Table view containing projects.
+    @IBOutlet weak var tableView: UITableView!
     
     /// Opens app's settings.
-    @objc func openSettings() {
+    @IBAction func openSettings(_ sender: Any) {
         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+    }
+    
+    /// Creates a project.
+    @IBAction func createProject(_ sender: Any) {
+        guard let projURL = Bundle.main.url(forResource: "Untitled", withExtension: "cproj") else {
+            return
+        }
+        
+        let directory: URL
+        if self.directory.resolvingSymlinksInPath() == DocumentBrowserViewController.local.fileURL.resolvingSymlinksInPath(), let iCloud = DocumentBrowserViewController.iCloud?.fileURL {
+            directory = iCloud
+        } else {
+            directory = self.directory
+        }
+        
+        let alert = UIAlertController(title: "New project", message: "Type the new project's name", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Create", style: .default, handler: { (_) in
+            var title = alert.textFields?.first?.text ?? "Untitled"
+            if title.isEmpty || title.replacingOccurrences(of: " ", with: "").isEmpty {
+                title = "Untitled"
+            }
+            title = title.replacingOccurrences(of: "\"", with: "”").replacingOccurrences(of: "'", with: "’")
+            try? FileManager.default.copyItem(at: projURL, to: directory.appendingPathComponent(title).appendingPathExtension("cproj"))
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addTextField { (textField) in
+            textField.placeholder = "Untitled"
+        }
+        present(alert, animated: true, completion: nil)
     }
     
     /// Opens LibTerm settings.
@@ -44,18 +159,64 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     /// The document that will be opened on `viewDidAppear(_:)`.
     var documentURL: URL?
     
+    /// Reloads files.
+    func reload() {
+        var files = [URL]()
+        if directory.resolvingSymlinksInPath() == DocumentBrowserViewController.local.fileURL.resolvingSymlinksInPath(), let iCloud = DocumentBrowserViewController.iCloud?.fileURL {
+            files = FileManager.default.listFiles(path: iCloud.path)+FileManager.default.listFiles(path: directory.path)
+        } else {
+            files = FileManager.default.listFiles(path: directory.path)
+        }
+        
+        self.files = []
+        for file in files {
+            
+            var hidden = false
+            for component in file.pathComponents {
+                if component.hasPrefix(".") {
+                    
+                    if component.hasSuffix(".icloud") {
+                        var name = file.lastPathComponent
+                        name.removeFirst()
+                        self.files.append(file.deletingLastPathComponent().appendingPathComponent(name).deletingPathExtension())
+                    }
+                    
+                    hidden = true
+                    break
+                } else if component.lowercased().hasSuffix(".cproj") && file.pathExtension.lowercased() != "cproj" {
+                    
+                    hidden = true
+                    break
+                }
+            }
+            if hidden {
+                continue
+            }
+                        
+            var isDir: ObjCBool = false
+            if FileManager.default.fileExists(atPath: file.path, isDirectory: &isDir) && ((isDir.boolValue && file.pathExtension.lowercased() == "cproj") || file.pathExtension.lowercased() == "ll" || file.pathExtension.lowercased() == "bc") {
+                self.files.append(file)
+            }
+        }
+        
+        tableView.reloadData()
+    }
+    
     // MARK: - Document browser view controller
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        delegate = self
+        let controller = UISearchController(searchResultsController: nil)
+        controller.obscuresBackgroundDuringPresentation = false
+        controller.automaticallyShowsCancelButton = true
+        controller.searchResultsUpdater = self
+        controller.searchBar.autocorrectionType = .no
         
-        localizedCreateDocumentActionTitle = "New Project"
-        defaultDocumentAspectRatio = 1
-        allowsDocumentCreation = true
-        allowsPickingMultipleItems = false
-        additionalLeadingNavigationBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(openSettings))]
+        definesPresentationContext = true
+        navigationItem.searchController = controller
+        
+        reload()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -73,53 +234,6 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         #endif
         
         ReviewHelper.shared.requestReview()
-    }
-    
-    // MARK: Document browser view controller delegate
-    
-    func documentBrowser(_ controller: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
-        
-        guard let projURL = Bundle.main.url(forResource: "Untitled", withExtension: "cproj") else {
-            importHandler(nil, .none)
-            return
-        }
-        
-        let alert = UIAlertController(title: "New project", message: "Type the new project's name", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Create", style: .default, handler: { (_) in
-            var title = alert.textFields?.first?.text ?? "Untitled"
-            if title.isEmpty || title.replacingOccurrences(of: " ", with: "").isEmpty {
-                title = "Untitled"
-            }
-            title = title.replacingOccurrences(of: "\"", with: "”").replacingOccurrences(of: "'", with: "’")
-            let newDocumentURL = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask)[0].appendingPathComponent(title+".cproj")
-            try? FileManager.default.copyItem(at: projURL, to: newDocumentURL)
-            
-            importHandler(newDocumentURL, .move)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
-            importHandler(nil, .none)
-        }))
-        alert.addTextField { (textField) in
-            textField.placeholder = "Untitled"
-        }
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func documentBrowser(_ controller: UIDocumentBrowserViewController, didPickDocumentsAt documentURLs: [URL]) {
-        guard let sourceURL = documentURLs.first else { return }
-        
-        // Present the Document View Controller for the first document that was picked.
-        // If you support picking multiple items, make sure you handle them all.
-        presentDocument(at: sourceURL)
-    }
-    
-    func documentBrowser(_ controller: UIDocumentBrowserViewController, didImportDocumentAt sourceURL: URL, toDestinationURL destinationURL: URL) {
-        // Present the Document View Controller for the new newly created document
-        presentDocument(at: destinationURL)
-    }
-    
-    func documentBrowser(_ controller: UIDocumentBrowserViewController, failedToImportDocumentAt documentURL: URL, error: Error?) {
-        // Make sure to handle the failed import appropriately, e.g., by presenting an error message to the user.
     }
     
     // MARK: Document Presentation
@@ -141,13 +255,8 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
                     doc.splitViewController = documentViewController
                     
                     documentViewController.modalPresentationStyle = .fullScreen
+                    documentViewController.modalTransitionStyle = .crossDissolve
                     documentViewController.loadViewIfNeeded()
-                    
-                    documentViewController.transitioningDelegate = self
-                    
-                    self.transitionController = self.transitionController(forDocumentAt: documentURL)
-                    self.transitionController?.loadingProgress = doc.progress
-                    self.transitionController?.targetView = documentViewController.view
                     
                     self.present(documentViewController, animated: true, completion: nil)
                 } else {
@@ -181,11 +290,6 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
             navVC.modalPresentationStyle = .fullScreen
             navVC.loadViewIfNeeded()
             
-            navVC.transitioningDelegate = self
-            
-            self.transitionController = self.transitionController(forDocumentAt: documentURL)
-            self.transitionController?.targetView = navVC.view
-            
             func run() {
                 ios_setDirectoryURL(FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask)[0])
                 
@@ -194,11 +298,15 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
                     terminal.isAskingForInput = false
                     
                     let path = documentURL.path.replacingOccurrences(of: " ", with: "\\ ").replacingOccurrences(of: "\"", with: "\\\"").replacingOccurrences(of: "'", with: "\\'")
-                    terminal.shell.run(command: "echo lli \(path)\(arguments != nil && !arguments!.isEmpty ? " "+arguments! : ""); lli \(path)\(arguments != nil && !arguments!.isEmpty ? " "+arguments! : "")")
+                    terminal.shell.run(command: "echo lli \(path)\(arguments != nil && !arguments!.isEmpty ? " "+arguments! : "")")
+                    sleep(UInt32(0.2))
+                    terminal.shell.run(command: "lli \(path)\(arguments != nil && !arguments!.isEmpty ? " "+arguments! : "")")
                     sleep(1)
-                    terminal.shell.run(command: "echo ''; echo Exited with status code: $?")
+                    terminal.shell.run(command: "echo")
+                    sleep(UInt32(0.2))
+                    terminal.shell.run(command: "echo Exited with status code: $?")
                     
-                    terminal.shell.history = terminal.shell.history.dropLast(2)
+                    terminal.shell.history = terminal.shell.history.dropLast(4)
                     
                     terminal.thread.asyncAfter(deadline: .now()+0.5) {
                         terminal.shell.input()
@@ -232,14 +340,100 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         }
     }
     
-    // MARK: - View controller transition delegate
+    // MARK: - Table view data source
     
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return transitionController
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (filtredFiles ?? files).count
     }
     
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return transitionController
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let file = (filtredFiles ?? files)[indexPath.row]
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "project", for: indexPath)
+        cell.textLabel?.text = file.deletingPathExtension().lastPathComponent
+        if file.deletingLastPathComponent().resolvingSymlinksInPath() == DocumentBrowserViewController.local.fileURL.resolvingSymlinksInPath() {
+            cell.detailTextLabel?.text = "In Local Storage"
+        } else if file.deletingLastPathComponent().resolvingSymlinksInPath() == DocumentBrowserViewController.iCloud?.fileURL.resolvingSymlinksInPath() {
+            cell.detailTextLabel?.text = "In iCloud"
+        } else {
+            cell.detailTextLabel?.text = file.deletingLastPathComponent().lastPathComponent
+        }
+        
+        var isDir: ObjCBool = true
+        if FileManager.default.fileExists(atPath: file.path, isDirectory: &isDir) {
+            if isDir.boolValue {
+                cell.imageView?.image = UIImage(systemName: "folder")
+            } else {
+                cell.imageView?.image = UIImage(systemName: "doc")
+            }
+        } else {
+            cell.imageView?.image = UIImage(systemName: "icloud.and.arrow.down")
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        let file = (filtredFiles ?? files)[indexPath.row]
+        
+        if editingStyle == .delete {
+            do {
+                do {
+                    try FileManager.default.trashItem(at: file, resultingItemURL: nil)
+                } catch {
+                    try FileManager.default.removeItem(at: file)
+                }
+                
+                if filtredFiles != nil {
+                    filtredFiles?.remove(at: indexPath.row)
+                } else {
+                    files.remove(at: indexPath.row)
+                }
+                
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            } catch {
+                let alert = UIAlertController(title: "Error removing file", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    // MARK: - Table view delegate
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        presentDocument(at: (filtredFiles ?? files)[indexPath.row])
+    }
+    
+    // MARK: - Search results updating
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        if let text = searchController.searchBar.text, !text.isEmpty, searchController.isActive {
+            filtredFiles = []
+            for file in files {
+                if file.deletingPathExtension().lastPathComponent.lowercased().contains(text.lowercased()) {
+                    filtredFiles?.append(file)
+                } else if file.deletingLastPathComponent().deletingPathExtension().lastPathComponent.contains(text.lowercased()) &&
+                    file.deletingLastPathComponent().resolvingSymlinksInPath() != DocumentBrowserViewController.local.fileURL.resolvingSymlinksInPath() &&
+                    file.deletingLastPathComponent().resolvingSymlinksInPath() != DocumentBrowserViewController.iCloud?.fileURL.resolvingSymlinksInPath() {
+                    
+                    filtredFiles?.append(file)
+                }
+            }
+        } else {
+            filtredFiles = nil
+        }
+        
+        tableView.reloadData()
     }
 }
 
