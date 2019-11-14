@@ -17,7 +17,7 @@ fileprivate extension LTTerminalViewController {
 }
 
 /// The document browser.
-class DocumentBrowserViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
+class DocumentBrowserViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UIContextMenuInteractionDelegate {
     
     /// A folder containing projects.
     class Folder: UIDocument {
@@ -371,6 +371,9 @@ class DocumentBrowserViewController: UIViewController, UITableViewDataSource, UI
             cell.imageView?.image = UIImage(systemName: "icloud.and.arrow.down")
         }
         
+        let interaction = UIContextMenuInteraction(delegate: self)
+        cell.addInteraction(interaction)
+        
         return cell
     }
     
@@ -434,6 +437,90 @@ class DocumentBrowserViewController: UIViewController, UITableViewDataSource, UI
         }
         
         tableView.reloadData()
+    }
+    
+    // MARK: - Context menu interaction delegate
+    
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        
+        guard let cell = interaction.view as? UITableViewCell else {
+            return nil
+        }
+        
+        let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { action in
+            
+            guard let index = self.tableView.indexPath(for: cell), self.files.indices.contains(index.row) else {
+                return
+            }
+            
+            let activityVC = UIActivityViewController(activityItems: [self.files[index.row]], applicationActivities: nil)
+            activityVC.popoverPresentationController?.sourceView = cell
+            activityVC.popoverPresentationController?.sourceRect = cell.bounds
+            self.present(activityVC, animated: true, completion: nil)
+        }
+        
+        let saveTo = UIAction(title: "Save to Files", image: UIImage(systemName: "folder")) { action in
+            
+            guard let index = self.tableView.indexPath(for: cell), self.files.indices.contains(index.row) else {
+                return
+            }
+            
+            self.present(UIDocumentPickerViewController(url: self.files[index.row], in: .exportToService), animated: true, completion: nil)
+        }
+        
+        let rename = UIAction(title: "Rename", image: UIImage(systemName: "pencil")) { action in
+            
+            guard let index = self.tableView.indexPath(for: cell), self.files.indices.contains(index.row) else {
+                return
+            }
+            
+            let file = self.files[index.row]
+            
+            var textField: UITextField!
+            let alert = UIAlertController(title: "Rename '\(file.lastPathComponent)'", message: "Type the new name", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Rename", style: .default, handler: { (_) in
+                do {
+                    
+                    let name = textField.text ?? ""
+                    
+                    if !name.isEmpty {
+                        try FileManager.default.moveItem(at: file, to: file.deletingLastPathComponent().appendingPathComponent(name))
+                    }
+                } catch {
+                    let alert = UIAlertController(title: "Error renaming file", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alert.addTextField { (_textField) in
+                textField = _textField
+                textField.placeholder = "Untitled"
+                textField.text = file.lastPathComponent
+            }
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash.fill"), attributes: .destructive) { action in
+            
+            guard let index = self.tableView.indexPath(for: cell), self.files.indices.contains(index.row) else {
+                return
+            }
+            
+            self.tableView(self.tableView, commit: .delete, forRowAt: index)
+        }
+
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { (_) -> UIMenu? in
+            
+            guard let index = self.tableView.indexPath(for: cell), self.files.indices.contains(index.row) else {
+                return nil
+            }
+            
+            return UIMenu(title: cell.textLabel?.text ?? "", children: [share, saveTo, rename, delete])
+        }
     }
 }
 
