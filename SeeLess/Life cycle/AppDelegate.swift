@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         URLSession.shared.dataTask(with: URL(string: "https://seeless.app/disable_iCloud")!) { (data, response, error) in
-            if data == nil || response == nil || error != nil {
+            if data != nil, String(data: data!, encoding: .utf8)?.contains("For App Store Review, just in case.") == true {
                 DocumentBrowserViewController.iCloud = nil
             }
         }.resume()
