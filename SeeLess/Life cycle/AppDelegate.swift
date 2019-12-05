@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if !FileManager.default.fileExists(atPath: iCloudURL.path) {
                 try? FileManager.default.createDirectory(at: iCloudURL, withIntermediateDirectories: true, attributes: nil)
             }
+            
+            putenv("ICLOUD=\(iCloudURL.path)".cValue)
         }
         
         // clang

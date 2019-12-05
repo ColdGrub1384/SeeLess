@@ -45,7 +45,6 @@
 		C92EB5532330712800D53648 /* id.c in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5522330712800D53648 /* id.c */; };
 		C92EB5592330714100D53648 /* open.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5542330714000D53648 /* open.swift */; };
 		C92EB55A2330714100D53648 /* exit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5552330714000D53648 /* exit.swift */; };
-		C92EB55B2330714100D53648 /* help.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5562330714000D53648 /* help.swift */; };
 		C92EB55C2330714100D53648 /* clear.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5572330714100D53648 /* clear.swift */; };
 		C92EB55D2330714100D53648 /* edit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5582330714100D53648 /* edit.swift */; };
 		C92EB5602330715400D53648 /* TerminalTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB55E2330715400D53648 /* TerminalTabViewController.swift */; };
@@ -299,7 +298,6 @@
 		C92EB5522330712800D53648 /* id.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = id.c; path = LibTerm/LibTerm/Commands/id.c; sourceTree = SOURCE_ROOT; };
 		C92EB5542330714000D53648 /* open.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = open.swift; path = LibTerm/LibTerm/Commands/builtins/open.swift; sourceTree = SOURCE_ROOT; };
 		C92EB5552330714000D53648 /* exit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = exit.swift; path = LibTerm/LibTerm/Commands/builtins/exit.swift; sourceTree = SOURCE_ROOT; };
-		C92EB5562330714000D53648 /* help.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = help.swift; path = LibTerm/LibTerm/Commands/builtins/help.swift; sourceTree = SOURCE_ROOT; };
 		C92EB5572330714100D53648 /* clear.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = clear.swift; path = LibTerm/LibTerm/Commands/builtins/clear.swift; sourceTree = SOURCE_ROOT; };
 		C92EB5582330714100D53648 /* edit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = edit.swift; path = LibTerm/LibTerm/Commands/builtins/edit.swift; sourceTree = SOURCE_ROOT; };
 		C92EB55E2330715400D53648 /* TerminalTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TerminalTabViewController.swift; path = "LibTerm/LibTerm/View controllers/TerminalTabViewController.swift"; sourceTree = SOURCE_ROOT; };
@@ -474,7 +472,6 @@
 				C92EB5572330714100D53648 /* clear.swift */,
 				C92EB5582330714100D53648 /* edit.swift */,
 				C92EB5552330714000D53648 /* exit.swift */,
-				C92EB5562330714000D53648 /* help.swift */,
 				C92EB5542330714000D53648 /* open.swift */,
 				C92EB5942330722200D53648 /* ssh.swift */,
 				C92EB5902330720E00D53648 /* credits.swift */,
@@ -1021,7 +1018,6 @@
 				C92EB5612330715400D53648 /* TerminalViewController.swift in Sources */,
 				C92EB5602330715400D53648 /* TerminalTabViewController.swift in Sources */,
 				C97212E8234152390073AE5D /* UITextView.swift in Sources */,
-				C92EB55B2330714100D53648 /* help.swift in Sources */,
 				C92EB5932330720E00D53648 /* package.swift in Sources */,
 				C988FE7123357AFA00305241 /* LineNumberTextView.m in Sources */,
 				C92EB55A2330714100D53648 /* exit.swift in Sources */,
@@ -1098,7 +1094,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = "SeeLess Intents/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1119,7 +1115,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = "SeeLess Intents/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1140,7 +1136,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = Thumbnail/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1161,7 +1157,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = Thumbnail/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1302,7 +1298,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SeeLess/SeeLess.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "#";
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1339,7 +1335,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SeeLess/SeeLess.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "#";
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

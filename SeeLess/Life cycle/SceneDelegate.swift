@@ -36,7 +36,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let userActivity = session.stateRestorationActivity ?? connectionOptions.userActivities.first, let bookmarkData = userActivity.userInfo?["bookmarkData"] as? Data {
             do {
                 var isStale = false
-                (window?.rootViewController as? DocumentBrowserViewController)?.documentURL = try URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isStale)
+                ((window?.rootViewController as? UINavigationController)?.viewControllers.first as? DocumentBrowserViewController)?.documentURL = try URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isStale)
             } catch {
                 print(error.localizedDescription)
             }
