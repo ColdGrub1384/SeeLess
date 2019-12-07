@@ -103,11 +103,13 @@ func helpMain(argc: Int, argv: [String], io: LTIO) -> Int32 {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .short
-        helpText = "SeeLess version \(version) (\(build)), \(formatter.string(from: BuildDate))\n\n"
+        helpText = "SeeLess version \(version) (\(build)), \(formatter.string(from: BuildDate))\n"
     } else {
-        helpText = "Unknown version\n\n"
+        helpText = "Unknown version\n"
     }
-    helpText += "Use the 'create' command to create a project and 'open' to open a project.\n\n"
+    if io.terminal?.shell is DocumentBrowserViewController.Shell {
+        helpText += "\nUse the 'create' command to create a project and 'open' to open a project.\n"
+    }
     #endif
     
     if argv.contains("--version") {
@@ -153,7 +155,7 @@ func createMain(argc: Int, argv: [String], io: LTIO) -> Int32 {
         return 1
     }
     
-    var url = URL(fileURLWithPath: args.joined(separator: " "), relativeTo: URL(fileURLWithPath: FileManager.default.currentDirectoryPath))
+    var url = URL(fileURLWithPath: args.joined(separator: " ").replacingOccurrences(of: "\\ ", with: " "), relativeTo: URL(fileURLWithPath: FileManager.default.currentDirectoryPath))
     if url.pathExtension.lowercased() != "cproj" {
         url = url.appendingPathExtension("cproj")
     }
@@ -178,7 +180,7 @@ func openProjectMain(argc: Int, argv: [String], io: LTIO) -> Int32 {
         return 1
     }
     
-    var url = URL(fileURLWithPath: args.joined(separator: " "), relativeTo: URL(fileURLWithPath: FileManager.default.currentDirectoryPath))
+    var url = URL(fileURLWithPath: args.joined(separator: " ").replacingOccurrences(of: "\\ ", with: " "), relativeTo: URL(fileURLWithPath: FileManager.default.currentDirectoryPath))
     if url.pathExtension.lowercased() != "cproj" && !FileManager.default.fileExists(atPath: url.path) {
         url = url.appendingPathExtension("cproj")
     }
@@ -258,6 +260,8 @@ class DocumentBrowserViewController: UIViewController {
         }
         
         ReviewHelper.shared.requestReview()
+        
+        (children.first as? LTTerminalViewController)?.shell.run(command: "", appendToHistory: false)
     }
     
     // MARK: Document Presentation
