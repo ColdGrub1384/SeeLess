@@ -125,7 +125,7 @@ class SplitViewController: UISplitViewController, UINavigationControllerDelegate
                     terminal.shell.run(command: "echo")
                     terminal.shell.run(command: "echo Exited with status code: $?")
                     
-                    terminal.shell.history = terminal.shell.history.dropLast(3)
+                    terminal.shell.history = terminal.shell.history.dropLast(4)
                 }
             }
             
