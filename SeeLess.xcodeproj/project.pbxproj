@@ -59,7 +59,6 @@
 		C92EB58D233071D100D53648 /* LibShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB58C233071D100D53648 /* LibShell.swift */; };
 		C92EB58F233071F200D53648 /* credits in Resources */ = {isa = PBXBuildFile; fileRef = C92EB58E233071F200D53648 /* credits */; };
 		C92EB5922330720E00D53648 /* credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5902330720E00D53648 /* credits.swift */; };
-		C92EB5932330720E00D53648 /* package.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5912330720E00D53648 /* package.swift */; };
 		C92EB5952330722200D53648 /* ssh.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5942330722200D53648 /* ssh.swift */; };
 		C92EB5972330724400D53648 /* GithubFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5962330724400D53648 /* GithubFile.swift */; };
 		C92EB5992330725700D53648 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5982330725700D53648 /* SettingsTableViewController.swift */; };
@@ -92,6 +91,7 @@
 		C995FB8E233AE5A000A8D42C /* Hello World.cproj in Resources */ = {isa = PBXBuildFile; fileRef = C995FB8D233AE5A000A8D42C /* Hello World.cproj */; };
 		C99FDFEA234A5C350022685B /* screenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99FDFE9234A5C350022685B /* screenshot.swift */; };
 		C9AAA25F23396864004B7433 /* Python_ios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9AAA25E2339685F004B7433 /* Python_ios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C9AE6B2323B2D0DB005F034D /* package.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE6B2223B2D0DB005F034D /* package.swift */; };
 		C9BA1DCD2348014A000FA9D4 /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = C995FB82233AE3D900A8D42C /* cacert.pem */; };
 		C9BA1DCE23480199000FA9D4 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5472330711000D53648 /* String.swift */; };
 		C9BA1DD023480683000FA9D4 /* input.txt in Resources */ = {isa = PBXBuildFile; fileRef = C9BA1DCF23480683000FA9D4 /* input.txt */; };
@@ -309,7 +309,6 @@
 		C92EB58C233071D100D53648 /* LibShell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LibShell.swift; path = LibTerm/LibTerm/LibShell.swift; sourceTree = SOURCE_ROOT; };
 		C92EB58E233071F200D53648 /* credits */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = credits; path = LibTerm/LibTerm/credits; sourceTree = SOURCE_ROOT; };
 		C92EB5902330720E00D53648 /* credits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = credits.swift; path = LibTerm/LibTerm/Commands/builtins/credits.swift; sourceTree = SOURCE_ROOT; };
-		C92EB5912330720E00D53648 /* package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = package.swift; path = LibTerm/LibTerm/Commands/builtins/package.swift; sourceTree = SOURCE_ROOT; };
 		C92EB5942330722200D53648 /* ssh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ssh.swift; path = LibTerm/LibTerm/Commands/builtins/ssh.swift; sourceTree = SOURCE_ROOT; };
 		C92EB5962330724400D53648 /* GithubFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GithubFile.swift; path = LibTerm/LibTerm/Helpers/GithubFile.swift; sourceTree = SOURCE_ROOT; };
 		C92EB5982330725700D53648 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableViewController.swift; path = "LibTerm/LibTerm/View controllers/SettingsTableViewController.swift"; sourceTree = SOURCE_ROOT; };
@@ -344,6 +343,7 @@
 		C995FB8D233AE5A000A8D42C /* Hello World.cproj */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "Hello World.cproj"; sourceTree = "<group>"; };
 		C99FDFE9234A5C350022685B /* screenshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = screenshot.swift; sourceTree = "<group>"; };
 		C9AAA25E2339685F004B7433 /* Python_ios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Python_ios.framework; path = LibTerm/Python_ios.framework; sourceTree = SOURCE_ROOT; };
+		C9AE6B2223B2D0DB005F034D /* package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = package.swift; sourceTree = "<group>"; };
 		C9B3A8F82335AD04005B6F49 /* SeeLess.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SeeLess.entitlements; sourceTree = "<group>"; };
 		C9BA1DCF23480683000FA9D4 /* input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
 		C9D934952333E62B00A43462 /* Thumbnail.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Thumbnail.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -475,7 +475,6 @@
 				C92EB5542330714000D53648 /* open.swift */,
 				C92EB5942330722200D53648 /* ssh.swift */,
 				C92EB5902330720E00D53648 /* credits.swift */,
-				C92EB5912330720E00D53648 /* package.swift */,
 				C92EB5522330712800D53648 /* id.c */,
 				C92EB5442330711000D53648 /* ANSITextState.swift */,
 				C92EB5422330711000D53648 /* BuildDate.swift */,
@@ -657,6 +656,7 @@
 			children = (
 				C9B3A8F82335AD04005B6F49 /* SeeLess.entitlements */,
 				C99FDFE9234A5C350022685B /* screenshot.swift */,
+				C9AE6B2223B2D0DB005F034D /* package.swift */,
 				C9470CA02335B33D0044F7E0 /* Life cycle */,
 				C9470CA62335B3610044F7E0 /* View controllers */,
 				C9470CA72335B37C0044F7E0 /* Models */,
@@ -1018,7 +1018,6 @@
 				C92EB5612330715400D53648 /* TerminalViewController.swift in Sources */,
 				C92EB5602330715400D53648 /* TerminalTabViewController.swift in Sources */,
 				C97212E8234152390073AE5D /* UITextView.swift in Sources */,
-				C92EB5932330720E00D53648 /* package.swift in Sources */,
 				C988FE7123357AFA00305241 /* LineNumberTextView.m in Sources */,
 				C92EB55A2330714100D53648 /* exit.swift in Sources */,
 				C988FE7023357AFA00305241 /* LineNumberTextViewWrapper.m in Sources */,
@@ -1026,6 +1025,7 @@
 				C92EB42F233027EC00D53648 /* FileBrowserViewController.swift in Sources */,
 				C92EB54B2330711000D53648 /* IO.swift in Sources */,
 				C9E2A891232EF02B0004F55B /* Document.swift in Sources */,
+				C9AE6B2323B2D0DB005F034D /* package.swift in Sources */,
 				C92EB54A2330711000D53648 /* BuildDate.swift in Sources */,
 				C92EB55C2330714100D53648 /* clear.swift in Sources */,
 				C9E2A88D232EF02B0004F55B /* DocumentBrowserViewController.swift in Sources */,
@@ -1094,7 +1094,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = "SeeLess Intents/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1102,7 +1102,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.ada.SeeLess.SeeLess-Intents";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1115,7 +1115,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = "SeeLess Intents/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1123,7 +1123,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.ada.SeeLess.SeeLess-Intents";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1136,7 +1136,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = Thumbnail/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1144,7 +1144,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.ada.SeeLess.Thumbnail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1157,7 +1157,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = Thumbnail/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1165,7 +1165,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.ada.SeeLess.Thumbnail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1298,7 +1298,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SeeLess/SeeLess.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1315,9 +1315,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/LibTerm/ios_system",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.ada.SeeLess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/SeeLess/SeeLess-BridgingHeader.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1335,7 +1336,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SeeLess/SeeLess.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1352,9 +1353,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/LibTerm/ios_system",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.ada.SeeLess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/SeeLess/SeeLess-BridgingHeader.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
