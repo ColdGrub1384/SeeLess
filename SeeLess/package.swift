@@ -11,7 +11,7 @@ import Foundation
 /// The 'package' command.
 func packageMain(argc: Int, argv: [String], io: LTIO) -> Int32 {
     
-    fputs("package is not supported by SeeLess.\n".cValue, io.stdout)
+    fputs("package is not supported by SeeLess. Third party commands can only be installed in LibTerm.\n".cValue, io.stdout)
     
     return 0
 }
