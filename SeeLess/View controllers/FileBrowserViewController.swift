@@ -362,17 +362,8 @@ class FileBrowserViewController: UITableViewController, UIDocumentPickerDelegate
         
         let file = files[indexPath.row]
         
-        let item = UIDragItem(itemProvider: NSItemProvider())
+        let item = UIDragItem(itemProvider: NSItemProvider(contentsOf: file) ?? NSItemProvider())
         item.itemProvider.registerObject(file.path.replacingOccurrences(of: " ", with: "\\ ").replacingOccurrences(of: "'", with: "\\'").replacingOccurrences(of: "\"", with: "\\\"") as NSItemProviderWriting, visibility: .ownProcess)
-        
-        item.itemProvider.registerFileRepresentation(forTypeIdentifier: (try? file.resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier ?? kUTTypeItem as String, fileOptions: .openInPlace, visibility: .all) { (handler) -> Progress? in
-            
-            handler(file, true, nil)
-            
-            let progress = Progress(totalUnitCount: 1)
-            progress.completedUnitCount = 1
-            return progress
-        }
         
         item.itemProvider.suggestedName = file.lastPathComponent
         item.localObject = LocalFile(url: file, directory: directory)
@@ -401,7 +392,7 @@ class FileBrowserViewController: UITableViewController, UIDocumentPickerDelegate
                         print(error.localizedDescription)
                     }
                     
-                    if let file = file {
+                    if let file = (item.dragItem.localObject as? LocalFile)?.url ?? file {
                         
                         let fileName = file.lastPathComponent
                         
