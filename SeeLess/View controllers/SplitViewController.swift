@@ -12,6 +12,29 @@ import ios_system
 /// A Split view controller containing a file browser and a terminal or a code editor.
 class SplitViewController: UISplitViewController, UINavigationControllerDelegate {
     
+    /// The shell.
+    class Shell: LibShell {
+        
+        override func run(command: String, appendToHistory: Bool = true) -> Int32 {
+            var args = [String]()
+            
+            for arg in command.components(separatedBy: " ") {
+                if let url = URL(string: arg), url.isFileURL, FileManager.default.fileExists(atPath: url.path) {
+                    args.append("\"\(url.path.replacingOccurrences(of: "\"", with: "\\\""))\"")
+                } else {
+                    args.append(arg)
+                }
+            }
+            
+            let result = super.run(command: args.joined(separator: " "), appendToHistory: appendToHistory)
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
+                self.io?.terminal?.parent?.navigationItem.title = self.io?.terminal?.title
+            }
+                        
+            return result
+        }
+    }
+    
     /// The current project.
     var document: Document?
     
@@ -152,7 +175,7 @@ class SplitViewController: UISplitViewController, UINavigationControllerDelegate
         
         var configuration = LTTerminalViewController.Preferences()
         configuration.barStyle = .default
-        terminal = LTTerminalViewController.makeTerminal(preferences: configuration, shell: LibShell())
+        terminal = LTTerminalViewController.makeTerminal(preferences: configuration, shell: Shell())
         terminal.edgesForExtendedLayout = []
         
         view.tintColor = .systemOrange

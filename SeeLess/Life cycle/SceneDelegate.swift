@@ -18,9 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func open(fileURL: URL) {
         guard fileURL.isFileURL else { return }
                 
-        guard let documentBrowserViewController = (window?.rootViewController as? UINavigationController)?.visibleViewController as? DocumentBrowserViewController else { return }
+        guard let documentBrowserViewController = window?.rootViewController as? DocumentBrowserViewController else { return }
 
-        documentBrowserViewController.presentDocument(at: fileURL)
+        documentBrowserViewController.revealDocument(at: fileURL, importIfNeeded: false) { (url, _) in
+            documentBrowserViewController.presentDocument(at: url ?? fileURL)
+        }
     }
     
     // MARK: - Window scene delegate

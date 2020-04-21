@@ -60,10 +60,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        DispatchQueue.global().async {
-            print(ios_system("clang"))
-        }
-        
         // ios_system
         
         // cacert.pem

@@ -42,7 +42,6 @@
 		C92EB54E2330711000D53648 /* CommandHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5462330711000D53648 /* CommandHelp.swift */; };
 		C92EB54F2330711000D53648 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5472330711000D53648 /* String.swift */; };
 		C92EB5512330711000D53648 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5492330711000D53648 /* Keys.swift */; };
-		C92EB5532330712800D53648 /* id.c in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5522330712800D53648 /* id.c */; };
 		C92EB5592330714100D53648 /* open.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5542330714000D53648 /* open.swift */; };
 		C92EB55A2330714100D53648 /* exit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5552330714000D53648 /* exit.swift */; };
 		C92EB55C2330714100D53648 /* clear.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EB5572330714100D53648 /* clear.swift */; };
@@ -73,6 +72,7 @@
 		C941F2C2233815B200F89B8B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C941F2BC233815B200F89B8B /* README.md */; };
 		C96A7C3A23417DB200E32D4E /* ios_system.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C92EB48A23306DCD00D53648 /* ios_system.framework */; };
 		C96A7C3B2341812600E32D4E /* commandDictionary.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9470CB12335B3BD0044F7E0 /* commandDictionary.plist */; };
+		C96C378F244E2B090046A696 /* id.c in Sources */ = {isa = PBXBuildFile; fileRef = C96C378E244E2B090046A696 /* id.c */; };
 		C97212E62341400E0073AE5D /* usr.zip in Resources */ = {isa = PBXBuildFile; fileRef = C97212E52341400E0073AE5D /* usr.zip */; };
 		C97212E8234152390073AE5D /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97212E7234152390073AE5D /* UITextView.swift */; };
 		C97212F423416B490073AE5D /* SeeLess Intents.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C97212ED23416B490073AE5D /* SeeLess Intents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -296,7 +296,6 @@
 		C92EB5462330711000D53648 /* CommandHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommandHelp.swift; path = LibTerm/LibTerm/Helpers/CommandHelp.swift; sourceTree = SOURCE_ROOT; };
 		C92EB5472330711000D53648 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = String.swift; path = LibTerm/LibTerm/Helpers/String.swift; sourceTree = SOURCE_ROOT; };
 		C92EB5492330711000D53648 /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keys.swift; path = LibTerm/LibTerm/Helpers/Keys.swift; sourceTree = SOURCE_ROOT; };
-		C92EB5522330712800D53648 /* id.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = id.c; path = LibTerm/LibTerm/Commands/id.c; sourceTree = SOURCE_ROOT; };
 		C92EB5542330714000D53648 /* open.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = open.swift; path = LibTerm/LibTerm/Commands/builtins/open.swift; sourceTree = SOURCE_ROOT; };
 		C92EB5552330714000D53648 /* exit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = exit.swift; path = LibTerm/LibTerm/Commands/builtins/exit.swift; sourceTree = SOURCE_ROOT; };
 		C92EB5572330714100D53648 /* clear.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = clear.swift; path = LibTerm/LibTerm/Commands/builtins/clear.swift; sourceTree = SOURCE_ROOT; };
@@ -326,6 +325,7 @@
 		C9470CAB2335B3B40044F7E0 /* python37.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = python37.zip; sourceTree = "<group>"; };
 		C9470CB02335B3BD0044F7E0 /* python27.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = python27.zip; path = LibTerm/LibTerm/python27.zip; sourceTree = SOURCE_ROOT; };
 		C9470CB12335B3BD0044F7E0 /* commandDictionary.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = commandDictionary.plist; path = LibTerm/LibTerm/commandDictionary.plist; sourceTree = SOURCE_ROOT; };
+		C96C378E244E2B090046A696 /* id.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = id.c; path = Commands/ios_system/id.c; sourceTree = "<group>"; };
 		C97212E52341400E0073AE5D /* usr.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = usr.zip; sourceTree = "<group>"; };
 		C97212E7234152390073AE5D /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		C97212ED23416B490073AE5D /* SeeLess Intents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SeeLess Intents.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -477,7 +477,7 @@
 				C92EB5542330714000D53648 /* open.swift */,
 				C92EB5942330722200D53648 /* ssh.swift */,
 				C92EB5902330720E00D53648 /* credits.swift */,
-				C92EB5522330712800D53648 /* id.c */,
+				C96C378E244E2B090046A696 /* id.c */,
 				C92EB5442330711000D53648 /* ANSITextState.swift */,
 				C92EB5422330711000D53648 /* BuildDate.swift */,
 				C92EB5962330724400D53648 /* GithubFile.swift */,
@@ -1004,7 +1004,6 @@
 				C92EB43A2330305C00D53648 /* TextDocument.swift in Sources */,
 				C9AE6B2E23B2E03E005F034D /* NavigationController.swift in Sources */,
 				C92EB5512330711000D53648 /* Keys.swift in Sources */,
-				C92EB5532330712800D53648 /* id.c in Sources */,
 				C92EB54C2330711000D53648 /* ANSITextState.swift in Sources */,
 				C92EB42D2330250800D53648 /* SplitViewController.swift in Sources */,
 				C92EB58D233071D100D53648 /* LibShell.swift in Sources */,
@@ -1017,6 +1016,7 @@
 				C92EB54F2330711000D53648 /* String.swift in Sources */,
 				C92EB59B2330727000D53648 /* Commands.swift in Sources */,
 				C93F77AA236C9AB10036D151 /* ReviewHelper.swift in Sources */,
+				C96C378F244E2B090046A696 /* id.c in Sources */,
 				C92EB5952330722200D53648 /* ssh.swift in Sources */,
 				C92EB55D2330714100D53648 /* edit.swift in Sources */,
 				C92EB5612330715400D53648 /* TerminalViewController.swift in Sources */,
@@ -1106,7 +1106,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.ada.SeeLess.SeeLess-Intents";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1127,7 +1127,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.ada.SeeLess.SeeLess-Intents";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1148,7 +1148,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.ada.SeeLess.Thumbnail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1169,7 +1169,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.ada.SeeLess.Thumbnail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1319,7 +1319,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/LibTerm/ios_system",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.ada.SeeLess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1357,7 +1357,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/LibTerm/ios_system",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.ada.SeeLess;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";

@@ -107,9 +107,6 @@ func helpMain(argc: Int, argv: [String], io: LTIO) -> Int32 {
     } else {
         helpText = "Unknown version\n"
     }
-    if io.terminal?.shell is DocumentBrowserViewController.Shell {
-        helpText += "\nUse the 'create' command to create a project and 'open' to open a project.\n"
-    }
     #endif
     
     if argv.contains("--version") {
@@ -144,75 +141,8 @@ func helpMain(argc: Int, argv: [String], io: LTIO) -> Int32 {
     return 0
 }
 
-/// The `create` command.
-func createMain(argc: Int, argv: [String], io: LTIO) -> Int32 {
-    
-    var args = argv
-    args.removeFirst()
-    
-    if args.count == 0 {
-        fputs("Usage:\n\n  \(argv[0]) PROJECT_NAME\n", io.stderr)
-        return 1
-    }
-    
-    var url = URL(fileURLWithPath: args.joined(separator: " ").replacingOccurrences(of: "\\ ", with: " "), relativeTo: URL(fileURLWithPath: FileManager.default.currentDirectoryPath))
-    if url.pathExtension.lowercased() != "cproj" {
-        url = url.appendingPathExtension("cproj")
-    }
-    do {
-        try FileManager.default.copyItem(at: Bundle.main.url(forResource: "Untitled", withExtension: "cproj")!, to: url)
-    } catch {
-        fputs("\(error.localizedDescription)\n", io.stderr)
-        return 1
-    }
-    
-    return 0
-}
-
-/// The `open` command.
-func openProjectMain(argc: Int, argv: [String], io: LTIO) -> Int32 {
-    
-    var args = argv
-    args.removeFirst()
-    
-    if args.count == 0 {
-        fputs("Usage:\n\n  \(argv[0]) PROJECT_NAME\n", io.stderr)
-        return 1
-    }
-    
-    var url = URL(fileURLWithPath: args.joined(separator: " ").replacingOccurrences(of: "\\ ", with: " "), relativeTo: URL(fileURLWithPath: FileManager.default.currentDirectoryPath))
-    if url.pathExtension.lowercased() != "cproj" && !FileManager.default.fileExists(atPath: url.path) {
-        url = url.appendingPathExtension("cproj")
-    }
-    
-    DispatchQueue.main.async {
-        (io.terminal?.parent as? DocumentBrowserViewController)?.presentDocument(at: url)
-    }
-    
-    return 0
-}
-
 /// The document browser.
-class DocumentBrowserViewController: UIViewController {
-    
-    /// A shell for managing projects.
-    class Shell: LibShell {
-        
-        override var builtins: [String : LTCommand] {
-            var builtins = super.builtins
-            builtins["create"] = createMain
-            builtins["open"] = openProjectMain
-            return builtins
-        }
-        
-        override func run(command: String, appendToHistory: Bool = true) -> Int32 {
-            let result = super.run(command: command, appendToHistory: appendToHistory)
-            DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
-                self.io?.terminal?.parent?.navigationItem.title = self.io?.terminal?.title
-            }
-            return result
-        }
-    }
+class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate {
     
     /// Opens app's settings.
     @IBAction func openSettings(_ sender: Any) {
@@ -242,11 +172,11 @@ class DocumentBrowserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let term = LTTerminalViewController.makeTerminal(preferences: LTTerminalViewController.Preferences(), shell: Shell())
-        addChild(term)
-        view.addSubview(term.view)
-        term.view.frame = view.frame
-        term.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        additionalTrailingNavigationBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(openSettings(_:)))]
+        
+        delegate = self
+        
+        allowsPickingMultipleItems = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -262,6 +192,50 @@ class DocumentBrowserViewController: UIViewController {
         ReviewHelper.shared.requestReview()
         
         (children.first as? LTTerminalViewController)?.shell.run(command: "", appendToHistory: false)
+    }
+    
+    func documentBrowser(_ controller: UIDocumentBrowserViewController, didPickDocumentsAt documentURLs: [URL]) {
+        presentDocument(at: documentURLs[0])
+    }
+    
+    func documentBrowser(_ controller: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
+        
+        let alert = UIAlertController(title: "New C Project", message: "Type the new project's name", preferredStyle: .alert)
+        
+        var textField: UITextField?
+        
+        alert.addTextField { (_textField) in
+            textField = _textField
+        }
+        
+        alert.addAction(UIAlertAction(title: "Create", style: .default, handler: { (_) in
+            
+            if var title = textField?.text, !title.isEmpty, let projURL = Bundle.main.url(forResource: "Hello World", withExtension: "cproj") {
+                
+                title = title.replacingOccurrences(of: "\"", with: "”").replacingOccurrences(of: "'", with: "’")
+                let newDocumentURL = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask)[0].appendingPathComponent(title+".cproj")
+                try? FileManager.default.copyItem(at: projURL, to: newDocumentURL)
+
+                importHandler(newDocumentURL, .move)
+            } else {
+                importHandler(nil, .none)
+            }
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            importHandler(nil, .none)
+        }))
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func documentBrowser(_ controller: UIDocumentBrowserViewController, failedToImportDocumentAt documentURL: URL, error: Error?) {
+        print(error?.localizedDescription ?? "")
+    }
+    
+    func documentBrowser(_ controller: UIDocumentBrowserViewController, didImportDocumentAt sourceURL: URL, toDestinationURL destinationURL: URL) {
+        
+        presentDocument(at: destinationURL)
     }
     
     // MARK: Document Presentation
